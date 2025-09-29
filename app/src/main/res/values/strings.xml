@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TP3android</string>
+    <string name="nombre">Nombre</string>
+    <string name="codigo">Código</string>
+    <string name="descripcion">Descripción</string>
+    <string name="precio">Precio</string>
+    <string name="nav_header_desc">Menú de navegación</string>
+    <string name="nav_header_title">TP3 Android</string>
+    <string name="nav_header_subtitle">Bienvenido</string>
+    <string name="cargar">Cargar</string>
+    <string name="listar">Listar</string>
+    <string name="salir">Salir</string>
+    <string name="action_settings">Configuración</string>
+</resources>
