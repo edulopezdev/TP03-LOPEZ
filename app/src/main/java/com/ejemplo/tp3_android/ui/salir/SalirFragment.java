@@ -1,6 +1,7 @@
 package com.ejemplo.tp3_android.ui.salir;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,42 +30,27 @@ public class SalirFragment extends Fragment {
 
         final TextView textView = binding.textSlideshow;
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        mostrarDialogoDeSalida();
+        muestraDialog(getActivity());
         return root;
     }
 
-    private void mostrarDialogoDeSalida() {
-        if (getContext() == null) {
-            return;
-        }
-        new AlertDialog.Builder(getContext())
-                .setTitle("Confirmar Salida")
-                .setMessage("¿Estás seguro de que deseas salir de la aplicación?")
-                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+    private void muestraDialog(Context donde){
+        new AlertDialog.Builder(donde)
+                .setTitle("Salir")
+                .setMessage("Cerrar aplicacion?")
+                .setIcon(android.R.drawable.ic_lock_power_off)
+                .setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener(){
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Cerrar la app
-                        if (getActivity() != null) {
-                            getActivity().finishAffinity();
-                        }
+                    public void onClick(DialogInterface di,int i){
+                        getActivity().finish();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(android.R.string.no,new DialogInterface.OnClickListener(){
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Volver al fragmento anterior
-                        if (getParentFragment() != null) {
-                            NavHostFragment.findNavController(SalirFragment.this).popBackStack();
-                        } else if (getActivity() != null) {
-                            // No hacer nada, simplemente cerrar el diálogo
-                        }
-                        dialog.dismiss();
+                    public void onClick(DialogInterface di,int i){
+                        getActivity().getSupportFragmentManager().popBackStack();
                     }
-                })
-                .setCancelable(false)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
-    }
+                }).show();}
 
     @Override
     public void onDestroyView() {
